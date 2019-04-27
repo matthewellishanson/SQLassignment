@@ -114,6 +114,26 @@ inner join city on address.city_id = city.city_id
 inner join country on city.country_id = country.country_id
 where country = 'Canada';
 
-select * from customer;
+-- 7d
+select title from film
+inner join film_category on film.film_id = film_category.film_id
+inner join category on category.category_id = film_category.category_id
+where name= 'Family';
+
+-- 7e
+select count(rental_id) as rental_count, title
+from rental
+inner join inventory on inventory.inventory_id = rental.inventory_id
+inner join film on film.film_id = inventory.film_id
+group by title
+order by rental_count desc;
+
+-- 7f
+select store.store_id, sum(payment.amount) as business_in_dollars
+from store
+inner join customer on customer.store_ID = store.store_ID
+inner join payment on payment.customer_id = customer.customer_id
+group by store.store_id;
+
 
 
