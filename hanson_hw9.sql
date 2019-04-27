@@ -55,7 +55,20 @@ where last_name = 'WILLIAMS' and first_name = 'GROUCHO';
 update actor set first_name = 'GROUCHO'
 where last_name = 'WILLIAMS' and first_name = 'HARPO';
 
+-- 5a
+show create table address;
 
+-- 6a
+select first_name, last_name, address
+from staff
+inner join address on address.address_id = staff.address_id;
+
+-- 6b
+select first_name, last_name, sum(amount) as total_spent
+from staff
+join payment on payment.staff_id = staff.staff_id
+and payment_date between '2005-08-01 00:00:00' and '2005-09-01 00:00:00'
+group by first_name, last_name;
 
 
 
