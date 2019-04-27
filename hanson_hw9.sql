@@ -91,5 +91,29 @@ group by first_name, last_name
 order by last_name asc;
 
 
+-- 7a 
+# first, select * from language to identify language_id for English
+select title
+from film
+where title like 'K%'
+or title like 'Q%'
+and language_id = 1;
+
+-- 7b
+select * from actor where actor.actor_id in (
+	select actor_id from film_actor where film_actor.film_id in
+		(
+			select film_id from film where title = "Alone Trip"
+		)
+	);
+    
+-- 7c 
+select first_name, last_name, email from customer 
+inner join address on customer.address_id = address.address_id
+inner join city on address.city_id = city.city_id
+inner join country on city.country_id = country.country_id
+where country = 'Canada';
+
+select * from customer;
 
 
