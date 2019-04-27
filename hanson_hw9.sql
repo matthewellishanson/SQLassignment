@@ -135,5 +135,40 @@ inner join customer on customer.store_ID = store.store_ID
 inner join payment on payment.customer_id = customer.customer_id
 group by store.store_id;
 
+-- 7g
+select store_id, city, country from store
+inner join address on address.address_id = store.address_id
+inner join city on city.city_id = address.city_id
+inner join country on country.country_id = city.country_id;
+
+-- 7h
+select category.name as category_name, sum(amount) as gross_revenue
+from payment
+inner join rental on  rental.rental_id = payment.rental_id
+inner join inventory on inventory.inventory_id = rental.inventory_id
+inner join film_category on film_category.film_id = inventory.film_id
+inner join category on category.category_id = film_category.category_id
+group by name
+order by gross_revenue desc
+limit 5;
+
+-- 8a
+create view top_five as (
+	select name as category_name, sum(amount) as gross_revenue
+	from payment
+	inner join rental on  rental.rental_id = payment.rental_id
+	inner join inventory on inventory.inventory_id = rental.inventory_id
+	inner join film_category on film_category.film_id = inventory.film_id
+	inner join category on category.category_id = film_category.category_id
+	group by name
+	order by gross_revenue desc
+	limit 5
+);
+
+-- 8b
+select * from top_five;
+
+-- 8c
+drop view top_five;
 
 
