@@ -70,5 +70,26 @@ join payment on payment.staff_id = staff.staff_id
 and payment_date between '2005-08-01 00:00:00' and '2005-09-01 00:00:00'
 group by first_name, last_name;
 
+-- 6c
+select title, count(actor_id) as actor_count
+from film
+inner join film_actor on film.film_id = film_actor.film_id
+group by title;
+
+-- 6d
+select count(inventory.film_id) as film_inventory_count
+from inventory
+inner join film on film.film_id = inventory.film_id
+where film.title = 'Hunchback Impossible'
+group by title;
+
+-- 6e
+select first_name, last_name, sum(amount) as total_spent
+from customer
+join payment on customer.customer_id = payment.customer_id
+group by first_name, last_name
+order by last_name asc;
+
+
 
 
